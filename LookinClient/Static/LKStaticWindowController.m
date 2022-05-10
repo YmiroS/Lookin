@@ -51,6 +51,11 @@
     [window center];
     [window setFrameUsingName:LKWindowSizeName_Static];
     
+    window.titleVisibility = NSWindowTitleHidden;
+    if (@available(macOS 11.0, *)) {
+        window.toolbarStyle = NSWindowToolbarStyleUnified;
+    }
+
     if (self = [self initWithWindow:window]) {
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_handleInspectingAppDidEnd:) name:LKInspectingAppDidEndNotificationName object:nil];
         

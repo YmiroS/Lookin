@@ -6,6 +6,7 @@
 //  Copyright © 2022 hughkli. All rights reserved.
 //
 
+#import <Foundation/Foundation.h>
 #import <WebKit/WebKit.h>
 #import "LKBaseViewController.h"
 #import "LKJsonEditWebView.h"
@@ -14,5 +15,5 @@
 @interface LKJsonEditController : LKBaseViewController<WKNavigationDelegate>
 
 @property (strong) LKJsonEditWebView *webView;
-
+- (void)loadJsonEditor;
 @end

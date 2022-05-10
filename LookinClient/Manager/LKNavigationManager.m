@@ -97,6 +97,8 @@
     if (!self.jsonEditWindowController) {
         _jsonEditWindowController = [LKJsonEditWindowController new];
         self.jsonEditWindowController.window.delegate = self;
+    } else {
+        [self.jsonEditWindowController refresh];
     }
     [self.jsonEditWindowController showWindow:self];
 }

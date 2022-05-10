@@ -16,6 +16,8 @@
 #import "LKNavigationManager.h"
 #import "LKTutorialManager.h"
 #import "LKTextFieldView.h"
+#import "LookinAttributesSection.h"
+#import "LKAppsManager.h"
 
 static NSString * const kMenuBindKey_RowView = @"view";
 static CGFloat const kRowHeight = 28;
@@ -282,6 +284,16 @@ static CGFloat const kRowHeight = 28;
         })];        
     }
     
+    [menu addItem:[NSMenuItem separatorItem]];
+    // jsonData 获取
+    [menu addItem:({
+        NSMenuItem *item = [NSMenuItem new];
+        item.target = self;
+        item.action = @selector(_showJsonData:);
+        item.title = NSLocalizedString(@"Json Data", nil);
+        item;
+    })];
+    
     // 复制文字
     NSMutableArray<NSString *> *stringsToCopy = [NSMutableArray array];
     
@@ -372,6 +384,35 @@ static CGFloat const kRowHeight = 28;
 - (void)_handleExportScreenshot:(NSMenuItem *)menuItem {
     LKHierarchyRowView *view = [menuItem.menu lookin_getBindObjectForKey:kMenuBindKey_RowView];
     [LKExportManager exportScreenshotWithDisplayItem:view.displayItem];
+}
+
+- (void)_showJsonData:(NSMenuItem *)menuItem {
+    LKHierarchyRowView *view = [menuItem.menu lookin_getBindObjectForKey:kMenuBindKey_RowView];
+    
+    if (![LKAppsManager sharedInstance].inspectingApp) {
+        AlertError(LookinErr_NoConnect, CurrentKeyWindow);
+        return;
+    }
+    LookinDisplayItem *item = view.displayItem;
+    NSArray<LookinAttributesGroup *> *group = item.attributesGroupList;
+    NSMutableString * jsonData = [NSMutableString stringWithString:@""];
+    for (LookinAttributesGroup *item in group) {
+        if ([item.identifier isEqualToString:LookinAttrGroup_Json]) {
+            LookinAttributesSection *section = item.attrSections.firstObject;
+            LookinAttribute *attribute = section.attributes.firstObject;
+            if (attribute != nil) {
+                NSArray<NSString*> *stringArray = (NSArray<NSString*> *)attribute.value;
+                jsonData = [stringArray.firstObject mutableCopy];
+                break;
+            }
+        }
+        
+    }
+    if (jsonData.length == 0) {
+        AlertErrorText(NSLocalizedString(@"Json Data is not available in selected View.", nil), NSLocalizedString(@"Look in the superview.", nil), CurrentKeyWindow);
+        return;
+    }
+    [LKNavigationManager.sharedInstance showJsonEdit:jsonData];
 }
 
 - (void)_handleCopyDisplayItemName:(NSMenuItem *)menuItem {

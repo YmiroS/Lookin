@@ -9,4 +9,5 @@
 #import "LKWindowController.h"
 
 @interface LKJsonEditWindowController : LKWindowController
+-(void)refresh;
 @end

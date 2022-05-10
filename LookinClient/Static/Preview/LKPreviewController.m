@@ -12,6 +12,7 @@
 #import "LKPreviewStageView.h"
 #import "LKPreviewPanGestureRecognizer.h"
 #import "LookinDisplayItem.h"
+#import "LKAppsManager.h"
 #import "LKHierarchyView.h"
 #import "LKPreferenceManager.h"
 #import "LookinAppInfo.h"
@@ -720,6 +721,10 @@
 }
 
 - (void)_jsonData:(NSMenuItem *)menuItem {
+    if (![LKAppsManager sharedInstance].inspectingApp) {
+        AlertError(LookinErr_NoConnect, CurrentKeyWindow);
+        return;
+    }
     LookinDisplayItem *item = self.rightClickingDisplayItem;
     NSArray<LookinAttributesGroup *> *group = item.attributesGroupList;
     NSMutableString * jsonData = [NSMutableString stringWithString:@""];
@@ -734,6 +739,10 @@
             }
         }
         
+    }
+    if (jsonData.length == 0) {
+        AlertErrorText(NSLocalizedString(@"Json Data is not available in selected View.", nil), NSLocalizedString(@"Look in the superview.", nil), CurrentKeyWindow);
+        return;
     }
     [LKNavigationManager.sharedInstance showJsonEdit:jsonData];
 }

@@ -1,54 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Bucket
-   uuid = "EAE83031-58FD-400D-8BCE-ABECDC76BE54"
+   uuid = "075BB8C7-D9F4-4A76-8FB0-97079DACB06D"
    type = "0"
    version = "2.0">
    <Breakpoints>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "0CFD982B-B9A3-4B42-A463-2798C04FBDEE"
+            uuid = "981C801E-6157-42C8-901D-32E45B9FC9B2"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "LookinClient/Edit/LKJsonEditWindowController.m"
+            filePath = "LookinClient/Static/LKStaticWindowController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "84"
-            endingLineNumber = "84"
-            landmarkName = "-toolbar:itemForItemIdentifier:willBeInsertedIntoToolbar:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "20F9DE0A-36A7-4832-85DF-E685F9569682"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "LookinClient/Edit/LKJsonEditController.m"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "66"
-            endingLineNumber = "66"
-            landmarkName = "-saveString"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "B8EA36B0-7A67-423C-8599-FF031515E474"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "LookinClient/Edit/LKJsonEditController.m"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "69"
-            endingLineNumber = "69"
-            landmarkName = "-saveString"
+            startingLineNumber = "252"
+            endingLineNumber = "252"
+            landmarkName = "-_handleReload"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

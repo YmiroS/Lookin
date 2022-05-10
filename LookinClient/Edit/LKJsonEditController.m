@@ -21,6 +21,7 @@
 
 - (NSView *)makeContainerView {
     LKBaseView *containerView = [LKBaseView new];
+    containerView.backgroundColor = [NSColor colorWithSRGBRed:30/255.0 green:30/255.0 blue:30/255.0 alpha:1];
     self.webView = [LKJsonEditWebView new];
     self.webView.hidden = YES;
     self.webView.navigationDelegate = self;
@@ -29,13 +30,12 @@
     } else {
         // Fallback on earlier versions
     }
-//    self.webView.enclosingScrollView.verticalScrollElasticity = NSScrollElasticityAutomatic;
-//    self.webView.enclosingScrollView.horizontalScrollElasticity = NSScrollElasticityAutomatic;
     [containerView addSubview:self.webView];
     return containerView;
 }
 - (void)viewDidLayout {
     [super viewDidLayout];
+    
     $(self.webView).width(self.view.bounds.size.width).height(self.view.bounds.size.height).horAlign;
     
 }
@@ -77,9 +77,8 @@
 }
 
 - (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation {
-    self.webView.hidden = NO;
     [self autoFormattor];
-    [self saveString];
+    self.webView.hidden = NO;
 }
 
 
