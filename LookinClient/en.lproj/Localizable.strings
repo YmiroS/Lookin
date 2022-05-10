@@ -51,6 +51,7 @@
 "Print stacks when the method you're interested in was invoked." = "Print stacks when the method you're interested in was invoked.";
 "Use this tool to debug when Xcode is unavailable, or find method invoker from the class that you cannot easily override." = "Use this tool to debug when Xcode is unavailable, or find method invoker from the class that you cannot easily override.";
 "Start" = "Start";
+"SaveAndRefresh" = "SaveAndRefresh";
 "Add Method" = "Add Method";
 "Stack Settings" = "Stack Settings";
 "Clear Logs" = "Clear Logs";

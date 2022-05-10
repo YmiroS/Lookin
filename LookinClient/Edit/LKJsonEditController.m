@@ -22,6 +22,7 @@
 - (NSView *)makeContainerView {
     LKBaseView *containerView = [LKBaseView new];
     self.webView = [LKJsonEditWebView new];
+    self.webView.hidden = YES;
     self.webView.navigationDelegate = self;
     if (@available(macOS 12.0, *)) {
         self.webView.underPageBackgroundColor = [NSColor colorWithSRGBRed:30/255.0 green:30/255.0 blue:30/255.0 alpha:1];
@@ -58,8 +59,17 @@
 
 - (void)webViewShow:(WebView *)sender {
     [self autoFormattor];
+    
 }
 
+-(void) saveString {
+    [_webView evaluateJavaScript:@"saveToString()"
+               completionHandler:^(id _Nullable obj, NSError * _Nullable error) {
+        //获取修改后的数据并保存,用于数据回传并刷新
+        NSString *saveString = (NSString*)obj;
+        
+    }];
+}
 
 - (void) autoFormattor
 {
@@ -67,7 +77,9 @@
 }
 
 - (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation {
+    self.webView.hidden = NO;
     [self autoFormattor];
+    [self saveString];
 }
 
 

@@ -467,7 +467,7 @@
                  LookinAttr_JsonData_JsonData_JsonData: @{
                          @"className": @"CALayer",
                          @"getterString": @"lks_selfJsonData",
-                         @"setterString": @"",
+                         @"setterString": @"setLks_selfJsonData:",
                          @"typeIfObj": @(LookinAttrTypeCustomObj)
                          },
                  LookinAttr_Layout_Frame_Frame: @{

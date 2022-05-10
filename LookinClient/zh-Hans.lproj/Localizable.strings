@@ -51,6 +51,7 @@
 "Print stacks when the method you're interested in was invoked." = "监听某些类的实例方法，并在方法被调用时打印堆栈";
 "Use this tool to debug when Xcode is unavailable, or find method invoker from the class that you cannot easily override." = "可供没有连接 Xcode 时调试 bug，或快速定位某个方法的调用者";
 "Start" = "开始使用";
+"SaveAndRefresh" = "保存并刷新";
 "Add Method" = "添加方法";
 "Stack Settings" = "堆栈格式";
 "Clear Logs" = "清空日志";

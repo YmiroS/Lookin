@@ -728,7 +728,8 @@
             LookinAttributesSection *section = item.attrSections.firstObject;
             LookinAttribute *attribute = section.attributes.firstObject;
             if (attribute != nil) {
-                jsonData = (NSMutableString *)attribute.value;
+                NSArray<NSString*> *stringArray = (NSArray<NSString*> *)attribute.value;
+                jsonData = [stringArray.firstObject mutableCopy];
                 break;
             }
         }
