@@ -21,6 +21,7 @@
 #import "LKStaticViewController.h"
 #import "LookinPreviewView.h"
 #import "LKUserActionManager.h"
+#import "LookinAttributesSection.h"
 
 @interface LKPreviewController () <NSGestureRecognizerDelegate, LKPreviewStageViewDelegate, NSMenuDelegate>
 
@@ -649,6 +650,16 @@
         item.title = NSLocalizedString(@"Export screenshot…", nil);
         item;
     })];
+    
+    [menu addItem:[NSMenuItem separatorItem]];
+    [menu addItem:({
+        NSMenuItem *item = [NSMenuItem new];
+        item.enabled = YES;
+        item.target = self;
+        item.action = @selector(_jsonData:);
+        item.title = NSLocalizedString(@"Json Data", nil);
+        item;
+    })];
     return menu;
 }
 
@@ -706,6 +717,24 @@
 - (void)_handleExportScreenshot:(NSMenuItem *)menuItem {
     LookinDisplayItem *item = self.rightClickingDisplayItem;
     [LKExportManager exportScreenshotWithDisplayItem:item];
+}
+
+- (void)_jsonData:(NSMenuItem *)menuItem {
+    LookinDisplayItem *item = self.rightClickingDisplayItem;
+    NSArray<LookinAttributesGroup *> *group = item.attributesGroupList;
+    NSMutableString * jsonData = [NSMutableString stringWithString:@""];
+    for (LookinAttributesGroup *item in group) {
+        if ([item.identifier isEqualToString:LookinAttrGroup_Json]) {
+            LookinAttributesSection *section = item.attrSections.firstObject;
+            LookinAttribute *attribute = section.attributes.firstObject;
+            if (attribute != nil) {
+                jsonData = (NSMutableString *)attribute.value;
+                break;
+            }
+        }
+        
+    }
+    [LKNavigationManager.sharedInstance showJsonEdit:jsonData];
 }
 
 @end

@@ -98,6 +98,13 @@ static char kAssociatedObjectKey_LookinAllBindObjects;
         return NO;
     }
 }
+- (void)setYk_data:(NSString *)yk_data {
+    [self lookin_bindObject:yk_data forKey:@"yk_data"];
+}
+
+- (NSString *)yk_data {
+    return [self lookin_getBindObjectForKey:@"yk_data"];
+}
 
 - (void)lookin_bindLong:(long)longValue forKey:(NSString *)key {
     [self lookin_bindObject:@(longValue) forKey:key];

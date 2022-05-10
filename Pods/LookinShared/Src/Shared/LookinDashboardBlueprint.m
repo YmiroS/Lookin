@@ -19,6 +19,7 @@
         array = @[
                   LookinAttrGroup_Class,
                   LookinAttrGroup_Relation,
+                  LookinAttrGroup_Json,
                   LookinAttrGroup_Layout,
                   LookinAttrGroup_AutoLayout,
                   LookinAttrGroup_ViewLayer,
@@ -44,6 +45,8 @@
                  LookinAttrGroup_Class: @[LookinAttrSec_Class_Class],
                  
                  LookinAttrGroup_Relation: @[LookinAttrSec_Relation_Relation],
+                 
+                 LookinAttrGroup_Json: @[LookinAttrSec_JsonData_JsonData],
                  
                  LookinAttrGroup_Layout: @[LookinAttrSec_Layout_Frame,
                                            LookinAttrSec_Layout_Bounds,
@@ -143,7 +146,7 @@
                  LookinAttrSec_Class_Class: @[LookinAttr_Class_Class_Class],
                  
                  LookinAttrSec_Relation_Relation: @[LookinAttr_Relation_Relation_Relation],
-                 
+                 LookinAttrSec_JsonData_JsonData: @[LookinAttr_JsonData_JsonData_JsonData],
                  LookinAttrSec_Layout_Frame: @[LookinAttr_Layout_Frame_Frame],
                  LookinAttrSec_Layout_Bounds: @[LookinAttr_Layout_Bounds_Bounds],
                  LookinAttrSec_Layout_SafeArea: @[LookinAttr_Layout_SafeArea_SafeArea],
@@ -333,6 +336,7 @@
         rawInfo = @{
                     LookinAttrGroup_Class: @"Class",
                     LookinAttrGroup_Relation: @"Relation",
+                    LookinAttrGroup_Json: @"Json Data",
                     LookinAttrGroup_Layout: @"Layout",
                     LookinAttrGroup_AutoLayout: @"AutoLayout",
                     LookinAttrGroup_ViewLayer: @"CALayer / UIView",
@@ -460,7 +464,12 @@
                          @"typeIfObj": @(LookinAttrTypeCustomObj),
                          @"hideIfNil": @(YES)
                          },
-                 
+                 LookinAttr_JsonData_JsonData_JsonData: @{
+                         @"className": @"CALayer",
+                         @"getterString": @"lks_selfJsonData",
+                         @"setterString": @"",
+                         @"typeIfObj": @(LookinAttrTypeCustomObj)
+                         },
                  LookinAttr_Layout_Frame_Frame: @{
                          @"className": @"CALayer",
                          @"fullTitle": @"Frame",

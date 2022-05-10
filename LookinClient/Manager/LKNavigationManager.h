@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@class LKLaunchWindowController, LKStaticWindowController, LKDynamicWindowController, LKWindowController, LKReadWindowController, LKMethodTraceWindowController, LKMethodTraceDataSource, LookinHierarchyInfo, LookinHierarchyFile;
+@class LKLaunchWindowController, LKStaticWindowController, LKDynamicWindowController, LKJsonEditWindowController, LKWindowController, LKReadWindowController, LKMethodTraceWindowController, LKMethodTraceDataSource, LookinHierarchyInfo, LookinHierarchyFile;
 
 @interface LKNavigationManager : NSObject <NSWindowDelegate>
 
@@ -26,6 +26,8 @@
 
 - (void)showMethodTrace;
 
+- (void)showJsonEdit: (NSString *)jsonString;
+
 - (BOOL)showReaderWithFilePath:(NSString *)filePath error:(NSError **)error;
 - (void)showReaderWithHierarchyFile:(LookinHierarchyFile *)file title:(NSString *)title;
 
@@ -33,6 +35,7 @@
 @property(nonatomic, strong, readonly) LKStaticWindowController *staticWindowController;
 @property(nonatomic, strong, readonly) LKMethodTraceWindowController *methodTraceWindowController;
 @property(nonatomic, strong) NSMutableArray<LKReadWindowController *> *readWindowControllers;
+@property(nonatomic, strong, readonly) LKJsonEditWindowController *jsonEditWindowController;
 
 - (LKWindowController *)currentKeyWindowController;
 

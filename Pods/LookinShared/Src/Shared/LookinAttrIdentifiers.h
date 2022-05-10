@@ -17,6 +17,7 @@ typedef NSString * LookinAttrGroupIdentifier;
 extern LookinAttrGroupIdentifier const LookinAttrGroup_None;
 extern LookinAttrGroupIdentifier const LookinAttrGroup_Class;
 extern LookinAttrGroupIdentifier const LookinAttrGroup_Relation;
+extern LookinAttrGroupIdentifier const LookinAttrGroup_Json;
 extern LookinAttrGroupIdentifier const LookinAttrGroup_Layout;
 extern LookinAttrGroupIdentifier const LookinAttrGroup_AutoLayout;
 extern LookinAttrGroupIdentifier const LookinAttrGroup_ViewLayer;
@@ -40,7 +41,7 @@ extern LookinAttrSectionIdentifier const LookinAttrSec_None;
 extern LookinAttrSectionIdentifier const LookinAttrSec_Class_Class;
 
 extern LookinAttrSectionIdentifier const LookinAttrSec_Relation_Relation;
-
+extern LookinAttrSectionIdentifier const LookinAttrSec_JsonData_JsonData;
 extern LookinAttrSectionIdentifier const LookinAttrSec_Layout_Frame;
 extern LookinAttrSectionIdentifier const LookinAttrSec_Layout_Bounds;
 extern LookinAttrSectionIdentifier const LookinAttrSec_Layout_SafeArea;
@@ -130,7 +131,7 @@ extern LookinAttrIdentifier const LookinAttr_None;
 extern LookinAttrIdentifier const LookinAttr_Class_Class_Class;
 
 extern LookinAttrIdentifier const LookinAttr_Relation_Relation_Relation;
-
+extern LookinAttrIdentifier const LookinAttr_JsonData_JsonData_JsonData;
 extern LookinAttrIdentifier const LookinAttr_Layout_Frame_Frame;
 extern LookinAttrIdentifier const LookinAttr_Layout_Bounds_Bounds;
 extern LookinAttrIdentifier const LookinAttr_Layout_SafeArea_SafeArea;

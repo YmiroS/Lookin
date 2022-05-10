@@ -15,3 +15,12 @@
 }
 
 @end
+
+
+@implementation LKDashboardAttributeJsonDataView
+
+- (NSArray<NSString *> *)stringListWithAttribute:(LookinAttribute *)attribute {
+    return attribute.value;
+}
+
+@end

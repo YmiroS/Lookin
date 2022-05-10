@@ -66,6 +66,9 @@
 
 - (void)renderWithAttribute {
     NSArray<NSString *> *lists = [self stringListWithAttribute:self.attribute];
+    if (![lists respondsToSelector:@selector(count)]) {
+        return;
+    }
     self.labels = [self.labels lookin_resizeWithCount:lists.count add:^LKLabel *(NSUInteger idx) {
         LKLabel *label = [LKLabel new];
         label.selectable = YES;

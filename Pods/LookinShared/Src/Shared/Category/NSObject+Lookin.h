@@ -15,6 +15,8 @@
 
 @interface NSObject (Lookin)
 
+@property(nonatomic, copy) NSString *yk_data;
+
 #pragma mark - Data Bind
 
 /**

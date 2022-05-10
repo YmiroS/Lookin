@@ -11,3 +11,7 @@
 @interface LKDashboardAttributeRelationView : LKDashboardAttributeStringArrayView
 
 @end
+
+@interface LKDashboardAttributeJsonDataView : LKDashboardAttributeStringArrayView
+
+@end

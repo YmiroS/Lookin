@@ -20,6 +20,7 @@
 #import "LKConsoleViewController.h"
 #import "LKPreferenceManager.h"
 #import "LKAboutWindowController.h"
+#import "LKJsonEditWindowController.h"
 
 @interface LKNavigationManager ()
 
@@ -90,6 +91,30 @@
     }
     [self.methodTraceWindowController showWindow:self];
 }
+
+- (void)showJsonEdit: (NSString *)jsonString {
+    [self replaceJsonData:jsonString];
+    if (!self.jsonEditWindowController) {
+        _jsonEditWindowController = [LKJsonEditWindowController new];
+        self.jsonEditWindowController.window.delegate = self;
+    }
+    [self.jsonEditWindowController showWindow:self];
+}
+
+
+-(void) replaceJsonData:(NSString *) jsonData {
+    NSString* filePath = [[NSBundle mainBundle] pathForResource:@"main"
+                                                         ofType:@"html"
+                                                    inDirectory:@"EditStatic"];
+    NSMutableString *htmlString = [NSMutableString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:nil];
+//    _htmlString = htmlString;
+    NSString *newhtmlString = [htmlString stringByReplacingOccurrencesOfString:@"{%$#@!}" withString:jsonData];
+    NSString* newfilePath = [[NSBundle mainBundle] pathForResource:@"index"
+                                                         ofType:@"html"
+                                                    inDirectory:@"EditStatic"];
+    BOOL success = [newhtmlString writeToFile:newfilePath atomically:YES encoding:NSUTF8StringEncoding error:nil];
+}
+
 
 - (LKWindowController *)currentKeyWindowController {
     NSWindow *keyWindow = [NSApplication sharedApplication].keyWindow;

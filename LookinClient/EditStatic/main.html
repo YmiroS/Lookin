@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+	<meta name="viewport" content="width=device-width,initial-scale=1" />
+	<style>
+	body {
+        width: 100%;
+        height: 100%;
+		padding: 0;
+		margin: 0;
+	}
+	</style>
+</head>
+<body>
+
+<div id="container" style="width:100%;height:100vh;"></div>
+
+<script src="monaco-editor/min/vs/loader.js"></script>
+<script>
+	var editor = null;
+
+	function checkEditor() {
+		if (editor) {
+			return true;
+		}
+		alert('Editor is not fully initialized');
+		return false;
+	}
+
+	function printValue() {
+		if (checkEditor()) {
+			alert(editor.getValue());
+		}
+	}
+
+	function setValue(value) {
+		if (checkEditor()) {
+			editor.setValue(value);
+		}
+	}
+
+	function runJS() {
+		if (checkEditor()) {
+			alert(eval(editor.getValue()));
+		}
+	}
+
+    function autoFormattor() {
+        if (checkEditor()) {
+            editor.trigger('anyString', 'editor.action.formatDocument');//自动格式化代码
+        }
+    }
+    
+    var jsonString = '{%$#@!}';
+    
+	require.config({ paths: { 'vs': 'monaco-editor/min/vs' }});
+	require(['vs/editor/editor.main'], function() {
+		editor = monaco.editor.create(document.getElementById('container'), {
+			minimap: {
+				enabled: false,
+			},
+			value: jsonString,
+			language: 'json',
+            links: true,
+            folding: true,
+            automaticLayout: true,
+            autoIndent: true,
+            
+		});
+		
+		editor.wordWrap = 'on';
+		var themeString = 'vs-dark';
+		window.monaco.editor.setTheme(themeString);
+	});
+</script>
+</body>
+</html>

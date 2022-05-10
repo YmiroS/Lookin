@@ -3,11 +3,17 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		094E413CB04F29F94551D070 /* Pods_LookinClient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81A3B0CB06C22A05EDC913F3 /* Pods_LookinClient.framework */; };
+		55FD7FBB28292C32003D4412 /* EditStatic in Resources */ = {isa = PBXBuildFile; fileRef = 55FD7FBA28292C31003D4412 /* EditStatic */; };
+		55FD7FBF28292C56003D4412 /* LKJsonEditController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55FD7FBE28292C56003D4412 /* LKJsonEditController.m */; };
+		55FD7FC128292D28003D4412 /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55FD7FC028292D28003D4412 /* JavaScriptCore.framework */; platformFilter = maccatalyst; };
+		55FD7FC328292D30003D4412 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55FD7FC228292D30003D4412 /* WebKit.framework */; platformFilter = maccatalyst; };
+		55FD7FC628293112003D4412 /* LKJsonEditWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55FD7FC428293112003D4412 /* LKJsonEditWindowController.m */; };
+		55FD7FCA28293EEA003D4412 /* LKJsonEditWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 55FD7FC928293EEA003D4412 /* LKJsonEditWebView.m */; };
 		A26EF69427F89F83005A9E4E /* ShortCocoa+Private.m in Sources */ = {isa = PBXBuildFile; fileRef = A26EF68827F89F83005A9E4E /* ShortCocoa+Private.m */; };
 		A26EF69527F89F83005A9E4E /* ShortCocoaCore.m in Sources */ = {isa = PBXBuildFile; fileRef = A26EF68927F89F83005A9E4E /* ShortCocoaCore.m */; };
 		A26EF69627F89F83005A9E4E /* ShortCocoa+Others.m in Sources */ = {isa = PBXBuildFile; fileRef = A26EF68A27F89F83005A9E4E /* ShortCocoa+Others.m */; };
@@ -195,6 +201,15 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		55FD7FBA28292C31003D4412 /* EditStatic */ = {isa = PBXFileReference; lastKnownFileType = folder; path = EditStatic; sourceTree = "<group>"; };
+		55FD7FBD28292C56003D4412 /* LKJsonEditController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LKJsonEditController.h; sourceTree = "<group>"; };
+		55FD7FBE28292C56003D4412 /* LKJsonEditController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LKJsonEditController.m; sourceTree = "<group>"; };
+		55FD7FC028292D28003D4412 /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		55FD7FC228292D30003D4412 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
+		55FD7FC428293112003D4412 /* LKJsonEditWindowController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LKJsonEditWindowController.m; sourceTree = "<group>"; };
+		55FD7FC528293112003D4412 /* LKJsonEditWindowController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LKJsonEditWindowController.h; sourceTree = "<group>"; };
+		55FD7FC828293EEA003D4412 /* LKJsonEditWebView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LKJsonEditWebView.h; sourceTree = "<group>"; };
+		55FD7FC928293EEA003D4412 /* LKJsonEditWebView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LKJsonEditWebView.m; sourceTree = "<group>"; };
 		607BE4658FF90E8DCB8EC923 /* Pods-LookinClient.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LookinClient.debug.xcconfig"; path = "Target Support Files/Pods-LookinClient/Pods-LookinClient.debug.xcconfig"; sourceTree = "<group>"; };
 		81A3B0CB06C22A05EDC913F3 /* Pods_LookinClient.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LookinClient.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A26EF68627F89F83005A9E4E /* ShortCocoa+String.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ShortCocoa+String.h"; sourceTree = "<group>"; };
@@ -511,6 +526,8 @@
 			files = (
 				AA1CAA3E22E471EC006D9285 /* Security.framework in Frameworks */,
 				094E413CB04F29F94551D070 /* Pods_LookinClient.framework in Frameworks */,
+				55FD7FC328292D30003D4412 /* WebKit.framework in Frameworks */,
+				55FD7FC128292D28003D4412 /* JavaScriptCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -520,12 +537,27 @@
 		0A9FB6E904476A1F9D0BB82E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				55FD7FC228292D30003D4412 /* WebKit.framework */,
+				55FD7FC028292D28003D4412 /* JavaScriptCore.framework */,
 				AA1CAA3D22E471EC006D9285 /* Security.framework */,
 				AAB9517A22C3AECA00A5F958 /* Quartz.framework */,
 				AAB9519122C3BDC900A5F958 /* QuickLookThumbnailing.framework */,
 				81A3B0CB06C22A05EDC913F3 /* Pods_LookinClient.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		55FD7FBC28292C3D003D4412 /* Edit */ = {
+			isa = PBXGroup;
+			children = (
+				55FD7FC528293112003D4412 /* LKJsonEditWindowController.h */,
+				55FD7FC428293112003D4412 /* LKJsonEditWindowController.m */,
+				55FD7FBD28292C56003D4412 /* LKJsonEditController.h */,
+				55FD7FBE28292C56003D4412 /* LKJsonEditController.m */,
+				55FD7FC828293EEA003D4412 /* LKJsonEditWebView.h */,
+				55FD7FC928293EEA003D4412 /* LKJsonEditWebView.m */,
+			);
+			path = Edit;
 			sourceTree = "<group>";
 		};
 		5D159F647DFD4AA3F8E7F9E7 /* Pods */ = {
@@ -708,34 +740,36 @@
 		AA48F29D21CC0CA50032EC2C /* LookinClient */ = {
 			isa = PBXGroup;
 			children = (
-				AA6E0D8322E1D5BD00948877 /* Localizable.strings */,
+				55FD7FBA28292C31003D4412 /* EditStatic */,
 				AA48F2A921CC0CA60032EC2C /* Lookin.entitlements */,
+				AA66488B23696D220043B50A /* logo_jump.gif */,
 				AAA8C11C21CC17680017A345 /* AppDelegate.h */,
+				AA77A32C22CE0E7100C73721 /* lookin_icon.icns */,
 				AAA8C11321CC17680017A345 /* AppDelegate.m */,
 				AA48F2A721CC0CA60032EC2C /* main.m */,
-				AA66488B23696D220043B50A /* logo_jump.gif */,
+				AAA8C0C021CC17670017A345 /* LookinClient_PrefixHeader.pch */,
 				AA48F2A621CC0CA60032EC2C /* LookinClient_Info.plist */,
 				AA48F2A121CC0CA60032EC2C /* Assets.xcassets */,
-				AAA8C0C021CC17670017A345 /* LookinClient_PrefixHeader.pch */,
-				AA77A32C22CE0E7100C73721 /* lookin_icon.icns */,
-				A26EF68527F89F83005A9E4E /* ShortCocoa */,
 				AA39054E23694C3800CA7646 /* About */,
 				AAA8C08F21CC17670017A345 /* Base */,
-				AA08FC9322DF99E700F65B20 /* Tutorial */,
-				AA0757B922C606F3005535DC /* Export */,
-				AA0757C122C607D7005535DC /* Manager */,
-				AA8CFE222296DD5800B98BA2 /* MethodTrace */,
-				AA50753722A269F600D2A5AC /* Console */,
 				AAA8C08721CC17670017A345 /* Connection */,
-				AAA8C0F721CC17680017A345 /* Toolbar */,
-				D4224EF02358ED3A00ED9626 /* Measure */,
+				AA50753722A269F600D2A5AC /* Console */,
 				AAA8C0D621CC17680017A345 /* Dashboard */,
+				55FD7FBC28292C3D003D4412 /* Edit */,
+				AA0757B922C606F3005535DC /* Export */,
 				AAA8C0C221CC17670017A345 /* Hierarchy */,
 				AAA8C11421CC17680017A345 /* Launch */,
-				AAA8C0D221CC17680017A345 /* Static */,
-				AAD3872E2288614B00042229 /* Read */,
-				AAEE450821DF81C800BF2650 /* Preference */,
+				AA6E0D8322E1D5BD00948877 /* Localizable.strings */,
 				AA48F2A321CC0CA60032EC2C /* MainMenu.xib */,
+				AA0757C122C607D7005535DC /* Manager */,
+				D4224EF02358ED3A00ED9626 /* Measure */,
+				AA8CFE222296DD5800B98BA2 /* MethodTrace */,
+				AAEE450821DF81C800BF2650 /* Preference */,
+				AAD3872E2288614B00042229 /* Read */,
+				A26EF68527F89F83005A9E4E /* ShortCocoa */,
+				AAA8C0D221CC17680017A345 /* Static */,
+				AAA8C0F721CC17680017A345 /* Toolbar */,
+				AA08FC9322DF99E700F65B20 /* Tutorial */,
 			);
 			path = LookinClient;
 			sourceTree = "<group>";
@@ -1127,6 +1161,7 @@
 				AA6E0D8122E1D5BD00948877 /* Localizable.strings in Resources */,
 				AA66488C23696D220043B50A /* logo_jump.gif in Resources */,
 				AA48F2A521CC0CA60032EC2C /* MainMenu.xib in Resources */,
+				55FD7FBB28292C32003D4412 /* EditStatic in Resources */,
 				AA77A32D22CE0E7100C73721 /* lookin_icon.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1230,6 +1265,7 @@
 				AA17F390232FBD710082F393 /* LKDashboardAttributeTextView.m in Sources */,
 				AAA8C12B21CC17680017A345 /* LKBaseView.m in Sources */,
 				AA3A7D0923003F5800997887 /* LKHierarchyHandlersPopoverItemView.m in Sources */,
+				55FD7FC628293112003D4412 /* LKJsonEditWindowController.m in Sources */,
 				D4224EEF2358ED3400ED9626 /* LKMeasureController.m in Sources */,
 				AAA8C14021CC17680017A345 /* LKDashboardViewController.m in Sources */,
 				AAEF2C122308420400CFAC53 /* LookinDisplayItemNode.m in Sources */,
@@ -1258,6 +1294,7 @@
 				AAC323172267ABD200BACA67 /* LKWindowController.m in Sources */,
 				AA3A7D0523003D7A00997887 /* LKHierarchyHandlersPopoverController.m in Sources */,
 				AAD2BED7226B327000E83D01 /* LKOutlineRowView.m in Sources */,
+				55FD7FBF28292C56003D4412 /* LKJsonEditController.m in Sources */,
 				A26EF69527F89F83005A9E4E /* ShortCocoaCore.m in Sources */,
 				AA66C5A1231924BD00085C76 /* LKDashboardAccessoryWindowController.m in Sources */,
 				AA50753D22A27EAD00D2A5AC /* LKConsoleDataSourceRowItem.m in Sources */,
@@ -1281,6 +1318,7 @@
 				AAA8C14221CC17680017A345 /* LKEnumListRegistry.m in Sources */,
 				AAD8C02C22C60E06009253F4 /* LKReadHierarchyDataSource.m in Sources */,
 				AA22310D22AA717E00A5A975 /* LKDashboardSectionView.m in Sources */,
+				55FD7FCA28293EEA003D4412 /* LKJsonEditWebView.m in Sources */,
 				AAA9638D228428EE0047F707 /* NSPointerArray+LookinClient.m in Sources */,
 				AABEE3EC22970CCF0042EC5A /* LKMethodTraceMenuView.m in Sources */,
 				AAA8C14A21CC17680017A345 /* LKDashboardAttributeView.m in Sources */,
@@ -1479,7 +1517,7 @@
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = 5V3Z8FVWHU;
+				DEVELOPMENT_TEAM = 65H7L9M666;
 				ENABLE_HARDENED_RUNTIME = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1509,7 +1547,7 @@
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = 5V3Z8FVWHU;
+				DEVELOPMENT_TEAM = 65H7L9M666;
 				ENABLE_HARDENED_RUNTIME = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

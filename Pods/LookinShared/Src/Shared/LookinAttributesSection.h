@@ -9,9 +9,8 @@
 
 
 #import <Foundation/Foundation.h>
+#import "LookinAttribute.h"
 #import "LookinAttrIdentifiers.h"
-
-@class LookinAttribute;
 
 typedef NS_ENUM (NSInteger, LookinAttributesSectionStyle) {
     LookinAttributesSectionStyleDefault,    // 每个 attr 独占一行

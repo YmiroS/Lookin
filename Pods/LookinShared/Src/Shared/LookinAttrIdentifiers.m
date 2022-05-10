@@ -18,6 +18,7 @@
 LookinAttrGroupIdentifier const LookinAttrGroup_None = @"n";
 LookinAttrGroupIdentifier const LookinAttrGroup_Class = @"c";
 LookinAttrGroupIdentifier const LookinAttrGroup_Relation = @"r";
+LookinAttrGroupIdentifier const LookinAttrGroup_Json = @"j";
 LookinAttrGroupIdentifier const LookinAttrGroup_Layout = @"l";
 LookinAttrGroupIdentifier const LookinAttrGroup_AutoLayout = @"a";
 LookinAttrGroupIdentifier const LookinAttrGroup_ViewLayer = @"vl";
@@ -39,7 +40,7 @@ LookinAttrSectionIdentifier const LookinAttrSec_None = @"n";
 LookinAttrSectionIdentifier const LookinAttrSec_Class_Class = @"cl_c";
 
 LookinAttrSectionIdentifier const LookinAttrSec_Relation_Relation = @"r_r";
-
+LookinAttrSectionIdentifier const LookinAttrSec_JsonData_JsonData = @"j_j";
 LookinAttrSectionIdentifier const LookinAttrSec_Layout_Frame = @"l_f";
 LookinAttrSectionIdentifier const LookinAttrSec_Layout_Bounds = @"l_b";
 LookinAttrSectionIdentifier const LookinAttrSec_Layout_SafeArea = @"l_s";
@@ -127,7 +128,7 @@ LookinAttrIdentifier const LookinAttr_None = @"n";
 LookinAttrIdentifier const LookinAttr_Class_Class_Class = @"c_c_c";
 
 LookinAttrIdentifier const LookinAttr_Relation_Relation_Relation = @"r_r_r";
-
+LookinAttrIdentifier const LookinAttr_JsonData_JsonData_JsonData = @"j_j_j";
 LookinAttrIdentifier const LookinAttr_Layout_Frame_Frame = @"l_f_f";
 LookinAttrIdentifier const LookinAttr_Layout_Bounds_Bounds = @"l_b_b";
 LookinAttrIdentifier const LookinAttr_Layout_SafeArea_SafeArea = @"l_s_s";

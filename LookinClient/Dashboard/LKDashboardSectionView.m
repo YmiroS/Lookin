@@ -251,6 +251,8 @@
                 return [LKDashboardAttributeClassView class];
             } else if ([identifier isEqualToString:LookinAttr_Relation_Relation_Relation]) {
                 return [LKDashboardAttributeRelationView class];
+            } else if ([identifier isEqualToString:LookinAttr_JsonData_JsonData_JsonData]) {
+                return [LKDashboardAttributeJsonDataView class];
             } else if ([identifier isEqualToString:LookinAttr_AutoLayout_Constraints_Constraints]) {
                 return [LKDashboardAttributeConstraintsView class];
             } else if ([identifier isEqualToString:LookinAttr_UIImageView_Open_Open]) {
