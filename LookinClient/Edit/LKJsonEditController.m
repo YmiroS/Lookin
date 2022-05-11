@@ -25,6 +25,7 @@
     self.webView = [LKJsonEditWebView new];
     self.webView.hidden = YES;
     self.webView.navigationDelegate = self;
+    self.webView.UIDelegate = self;
     if (@available(macOS 12.0, *)) {
         self.webView.underPageBackgroundColor = [NSColor colorWithSRGBRed:30/255.0 green:30/255.0 blue:30/255.0 alpha:1];
     } else {
@@ -81,6 +82,22 @@
     self.webView.hidden = NO;
 }
 
+- (void)webView:(WKWebView *)webView didCommitNavigation:(WKNavigation *)navigation{
+    
+}
 
+- (WKWebView *)webView:(WKWebView *)webView createWebViewWithConfiguration:(WKWebViewConfiguration *)configuration forNavigationAction:(WKNavigationAction *)navigationAction windowFeatures:(WKWindowFeatures *)windowFeatures {
+    if (navigationAction.request.URL) {
+        [[NSWorkspace sharedWorkspace] openURL:navigationAction.request.URL];
+    }
+    return nil;
+}
+
+- (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
+    if (navigationAction.navigationType == WKNavigationTypeLinkActivated) {
+        
+    }
+    decisionHandler(WKNavigationActionPolicyAllow);
+}
 
 @end

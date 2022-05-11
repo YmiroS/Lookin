@@ -12,7 +12,7 @@
 #import "LKJsonEditWebView.h"
 
 
-@interface LKJsonEditController : LKBaseViewController<WKNavigationDelegate>
+@interface LKJsonEditController : LKBaseViewController<WKNavigationDelegate, WKUIDelegate>
 
 @property (strong) LKJsonEditWebView *webView;
 - (void)loadJsonEditor;
