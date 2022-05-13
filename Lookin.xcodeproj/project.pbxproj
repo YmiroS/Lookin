@@ -286,7 +286,7 @@
 		AA3D51A92289E57C00E4E6B7 /* LKExportManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LKExportManager.m; sourceTree = "<group>"; };
 		AA443BA122C40354009543D1 /* LKMethodTraceLaunchView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LKMethodTraceLaunchView.h; sourceTree = "<group>"; };
 		AA443BA222C40354009543D1 /* LKMethodTraceLaunchView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LKMethodTraceLaunchView.m; sourceTree = "<group>"; };
-		AA48F29B21CC0CA50032EC2C /* Lookin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Lookin.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AA48F29B21CC0CA50032EC2C /* Lookin for YouKu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Lookin for YouKu.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA48F2A121CC0CA60032EC2C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AA48F2A421CC0CA60032EC2C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		AA48F2A621CC0CA60032EC2C /* LookinClient_Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = LookinClient_Info.plist; sourceTree = "<group>"; };
@@ -733,7 +733,7 @@
 		AA48F29C21CC0CA50032EC2C /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				AA48F29B21CC0CA50032EC2C /* Lookin.app */,
+				AA48F29B21CC0CA50032EC2C /* Lookin for YouKu.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1109,7 +1109,7 @@
 			);
 			name = LookinClient;
 			productName = Lookin;
-			productReference = AA48F29B21CC0CA50032EC2C /* Lookin.app */;
+			productReference = AA48F29B21CC0CA50032EC2C /* Lookin for YouKu.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -1519,6 +1519,7 @@
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 10;
 				DEVELOPMENT_TEAM = 65H7L9M666;
 				ENABLE_HARDENED_RUNTIME = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1533,9 +1534,10 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.13;
-				PRODUCT_BUNDLE_IDENTIFIER = hughkli.Lookin;
-				PRODUCT_NAME = Lookin;
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MARKETING_VERSION = 2.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.youku.LookinClient;
+				PRODUCT_NAME = "Lookin for YouKu";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
 			name = Debug;
@@ -1549,6 +1551,7 @@
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 10;
 				DEVELOPMENT_TEAM = 65H7L9M666;
 				ENABLE_HARDENED_RUNTIME = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1563,9 +1566,10 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.13;
-				PRODUCT_BUNDLE_IDENTIFIER = hughkli.Lookin;
-				PRODUCT_NAME = Lookin;
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MARKETING_VERSION = 2.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.youku.LookinClient;
+				PRODUCT_NAME = "Lookin for YouKu";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
 			name = Release;

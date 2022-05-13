@@ -1,6 +1,6 @@
 
-/* Class = "NSMenuItem"; title = "Lookin"; ObjectID = "1Xt-HY-uBw"; */
-"1Xt-HY-uBw.title" = "Lookin";
+/* Class = "NSMenuItem"; title = "Lookin for YouKu"; ObjectID = "1Xt-HY-uBw"; */
+"1Xt-HY-uBw.title" = "Lookin for YouKu";
 
 /* Class = "NSMenuItem"; title = "Minimize"; ObjectID = "1su-F5-8TV"; */
 "1su-F5-8TV.title" = "最小化";
@@ -9,7 +9,7 @@
 "HyZ-cP-T4V.title" = "关闭";
 
 /* Class = "NSMenuItem"; title = "About Lookin"; ObjectID = "IFz-p9-h1r"; */
-"IFz-p9-h1r.title" = "关于 Lookin";
+"IFz-p9-h1r.title" = "关于 Lookin for YouKu";
 
 /* Class = "NSMenu"; title = "Window"; ObjectID = "KZS-d6-qTN"; */
 "KZS-d6-qTN.title" = "窗口";
@@ -28,16 +28,16 @@
 "XNQ-bk-Zmh.title" = "偏好设置…";
 
 /* Class = "NSMenuItem"; title = "Hide Lookin"; ObjectID = "dfQ-f5-8Pi"; */
-"dfQ-f5-8Pi.title" = "隐藏 Lookin";
+"dfQ-f5-8Pi.title" = "隐藏 Lookin for YouKu";
 
 /* Class = "NSMenuItem"; title = "Quit Lookin"; ObjectID = "hnm-1g-JSb"; */
-"hnm-1g-JSb.title" = "退出 Lookin";
+"hnm-1g-JSb.title" = "退出 Lookin for YouKu";
 
 /* Class = "NSMenuItem"; title = "Hide Others"; ObjectID = "jAC-pY-rhk"; */
 "jAC-pY-rhk.title" = "隐藏其他";
 
-/* Class = "NSMenu"; title = "Lookin"; ObjectID = "reQ-ix-KUg"; */
-"reQ-ix-KUg.title" = "Lookin";
+/* Class = "NSMenu"; title = "Lookin for YouKu"; ObjectID = "reQ-ix-KUg"; */
+"reQ-ix-KUg.title" = "Lookin for YouKu";
 "nwg-k0-yfh.title" = "文件";
 "4ra-hI-4DR.title" = "放大";
 "AUG-wQ-erT.title" = "缩小";

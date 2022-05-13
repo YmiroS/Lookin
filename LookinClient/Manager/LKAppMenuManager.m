@@ -17,7 +17,7 @@
 #import "LKStaticHierarchyDataSource.h"
 #import "LKWindowController.h"
 #include <mach-o/dyld.h>
-#import <Sparkle/Sparkle.h>
+//#import <Sparkle/Sparkle.h>
 
 static NSUInteger const kTag_About = 11;
 static NSUInteger const kTag_Preferences = 12;
@@ -94,9 +94,9 @@ static NSUInteger const kTag_ShowLookiniOS = 54;
     menuItem_preferences.target = self;
     menuItem_preferences.action = @selector(_handlePreferences);
     
-    NSMenuItem *menuItem_checkUpdates = [menu_lookin itemWithTag:kTag_CheckUpdates];
-    menuItem_checkUpdates.target = self;
-    menuItem_checkUpdates.action = @selector(_handleCheckUpdates);
+//    NSMenuItem *menuItem_checkUpdates = [menu_lookin itemWithTag:kTag_CheckUpdates];
+//    menuItem_checkUpdates.target = self;
+//    menuItem_checkUpdates.action = @selector(_handleCheckUpdates);
     
     // 文件
     NSMenu *menu_file = [menu itemAtIndex:1].submenu;
@@ -224,7 +224,7 @@ static NSUInteger const kTag_ShowLookiniOS = 54;
 }
 
 - (void)_handleCheckUpdates {
-    [[SUUpdater sharedUpdater] checkForUpdates:self];
+//    [[SUUpdater sharedUpdater] checkForUpdates:self];
 }
 
 - (void)_handleShowFramework {

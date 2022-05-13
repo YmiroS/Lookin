@@ -53,12 +53,12 @@
     [containerView addSubview:self.photoMaskView];
     
     self.logoImageView = [NSImageView new];
-    self.logoImageView.image = NSImageMake(@"logo_jump");
+    self.logoImageView.image = NSImageMake(@"AppIcon");
     self.logoImageView.animates = YES;
     [containerView addSubview:self.logoImageView];
     
     self.titleLabel = [LKLabel new];
-    self.titleLabel.stringValue = @"Lookin";
+    self.titleLabel.stringValue = @"Lookin for YouKu";
     self.titleLabel.textColors = LKColorsCombine([NSColor blackColor], [NSColor whiteColor]);
     self.titleLabel.font = [NSFont boldSystemFontOfSize:15];//NSFontMake(15);
     [containerView addSubview:self.titleLabel];
