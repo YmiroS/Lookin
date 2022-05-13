@@ -24,4 +24,5 @@
 
 - (void)modifyWithDisplayItemDetail:(LookinDisplayItemDetail *)detail;
 
+- (void)reloadWithHierarchyInfo:(LookinHierarchyInfo *)info keepState:(BOOL)keepState AndRootItem: (LookinDisplayItem *) item;
 @end

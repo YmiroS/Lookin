@@ -21,6 +21,8 @@
 #import "LKPreferenceManager.h"
 #import "LKAboutWindowController.h"
 #import "LKJsonEditWindowController.h"
+#import "LookinAttribute.h"
+
 
 @interface LKNavigationManager ()
 
@@ -92,7 +94,7 @@
     [self.methodTraceWindowController showWindow:self];
 }
 
-- (void)showJsonEdit: (NSString *)jsonString {
+- (void)showJsonEdit: (NSString *)jsonString AndAttribute:(LookinAttribute *)attribute {
     [self replaceJsonData:jsonString];
     if (!self.jsonEditWindowController) {
         _jsonEditWindowController = [LKJsonEditWindowController new];
@@ -100,6 +102,7 @@
     } else {
         [self.jsonEditWindowController refresh];
     }
+    self.jsonEditWindowController.attribute = attribute;
     [self.jsonEditWindowController showWindow:self];
 }
 
@@ -109,7 +112,6 @@
                                                          ofType:@"html"
                                                     inDirectory:@"EditStatic"];
     NSMutableString *htmlString = [NSMutableString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:nil];
-//    _htmlString = htmlString;
     NSString *newhtmlString = [htmlString stringByReplacingOccurrencesOfString:@"{%$#@!}" withString:jsonData];
     NSString* newfilePath = [[NSBundle mainBundle] pathForResource:@"index"
                                                          ofType:@"html"

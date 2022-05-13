@@ -359,7 +359,7 @@ static NSString * const Key_ServerSetupType = @"serverSetupType";
         NSArray<LookinAttrSectionIdentifier> *array = @[LookinAttrSec_Class_Class,
                                                         
                                                         LookinAttrSec_Relation_Relation,
-                                                        
+                                                        LookinAttrSec_JsonData_JsonData,
                                                         LookinAttrSec_Layout_Frame,
                                                         LookinAttrSec_Layout_Bounds,
                                                         

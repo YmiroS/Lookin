@@ -86,43 +86,28 @@
         
         if ([item.itemIdentifier isEqualToString:LKToolBarIdentifier_JsonDataSave]) {
             item.label = NSLocalizedString(@"SaveAndRefresh", nil);
-            item.target = self.contentViewController;
-            item.action = @selector(saveString);
+            item.target = self;
+            item.action = @selector(_saveString:);
         }
     }
     return item;
 }
 
-- (void)_handleSetting:(NSButton *)button {
-    LKPreferenceManager *manager = [LKPreferenceManager mainManager];
-
-    NSArray<NSNumber *> *options = @[@(LookinPreferredCallStackTypeDefault), @(LookinPreferredCallStackTypeFormattedCompletely), @(LookinPreferredCallStackTypeRaw)];
-    NSUInteger selectedIdx = [options indexOfObject:@(manager.callStackType)];
-    
-    NSArray<NSString *> *strings = @[NSLocalizedString(@"Format stacks and hide frames in system libraries", nil), NSLocalizedString(@"Format stacks and show all frames", nil), NSLocalizedString(@"Show raw informations", nil)];
-    
-    NSMenu *menu = [NSMenu new];
-    [strings enumerateObjectsUsingBlock:^(NSString * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        NSMenuItem *item = [NSMenuItem new];
-        if (idx == selectedIdx) {
-            item.state = NSControlStateValueOn;
-        } else {
-            item.state = NSControlStateValueOff;
-        }
-        item.tag = idx;
-        item.title = obj;
-        item.image = [[NSImage alloc] initWithSize:NSMakeSize(1, 24)];
-        item.target = self;
-        item.action = @selector(_handleSettingMenuItem:);
-        [menu addItem:item];
+- (void)_saveString:(NSButton *) button{
+    LKJsonEditController *vc = self.contentViewController;
+    @weakify(self);
+    [vc saveStringwithBlock:^(NSString *saveJson) {
+        @strongify(self);
+        [[self modifyAttribute:self.attribute newValue:@[saveJson]] subscribeError:^(NSError * _Nullable error) {
+            NSLog(@"修改返回 error");
+        }];
     }];
     
-    [menu popUpMenuPositioningItem:nil atLocation:NSMakePoint(0, button.bounds.size.height) inView:button];
 }
-
-- (void)_handleSettingMenuItem:(NSMenuItem *)item {
-    [LKPreferenceManager mainManager].callStackType = item.tag;
-}
+//
+//- (void)_handleSettingMenuItem:(NSMenuItem *)item {
+//    [LKPreferenceManager mainManager].callStackType = item.tag;
+//}
 
 
 - (RACSignal *)modifyAttribute:(LookinAttribute *)attribute newValue:(id)newValue {
@@ -156,17 +141,15 @@
         [[[LKAppsManager sharedInstance].inspectingApp submitModification:modification] subscribeNext:^(LookinDisplayItemDetail *detail) {
             NSLog(@"modification - succ");
             @strongify(self);
-//            if (self.staticDataSource) {
-//                [self.staticDataSource modifyWithDisplayItemDetail:detail];
-//                if ([LookinDashboardBlueprint needPatchAfterModificationWithAttrID:attribute.identifier]) {
-//                    [[LKStaticAsyncUpdateManager sharedInstance] updateAfterModifyingDisplayItem:(LookinStaticDisplayItem *)modifyingItem];
-//                }
-//
-//            } else {
-//                NSAssert(NO, @"");
-//            }
-            [subscriber sendNext:nil];
-            
+            LKInspectableApp *app = [LKAppsManager sharedInstance].inspectingApp;
+            [[app fetchHierarchyData] subscribeNext:^(LookinHierarchyInfo *info) {
+                [[LKStaticHierarchyDataSource sharedInstance] reloadWithHierarchyInfo:info keepState:NO AndRootItem: modifyingItem.superItem];
+            } error:^(NSError * _Nullable error) {
+                // error
+                @strongify(self);
+                
+                [[NSAlert alertWithError:error] beginSheetModalForWindow:self.window completionHandler:nil];
+            }];
         } error:^(NSError * _Nullable error) {
             @strongify(self);
             AlertError(error, self.contentViewController.view.window);

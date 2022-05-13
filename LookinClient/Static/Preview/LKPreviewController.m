@@ -726,8 +726,21 @@
         return;
     }
     LookinDisplayItem *item = self.rightClickingDisplayItem;
+    NSDictionary *jsonDic = [self findJsonData:item];
+    NSString *jsonData = [jsonDic valueForKey:@"attributeValue"];
+    LookinAttribute *attribute = [jsonDic valueForKey:@"attribute"];
+    if (jsonData.length == 0) {
+        AlertErrorText(NSLocalizedString(@"Json Data is not available in selected View.", nil), NSLocalizedString(@"Look in the superview.", nil), CurrentKeyWindow);
+        return;
+    }
+    [LKNavigationManager.sharedInstance showJsonEdit:jsonData AndAttribute:attribute];
+}
+
+-(NSDictionary *)findJsonData: (LookinDisplayItem *)item {
     NSArray<LookinAttributesGroup *> *group = item.attributesGroupList;
     NSMutableString * jsonData = [NSMutableString stringWithString:@""];
+    NSMutableDictionary * jsonDic = [NSMutableDictionary new];
+    BOOL find = NO;
     for (LookinAttributesGroup *item in group) {
         if ([item.identifier isEqualToString:LookinAttrGroup_Json]) {
             LookinAttributesSection *section = item.attrSections.firstObject;
@@ -735,16 +748,21 @@
             if (attribute != nil) {
                 NSArray<NSString*> *stringArray = (NSArray<NSString*> *)attribute.value;
                 jsonData = [stringArray.firstObject mutableCopy];
+                if (stringArray.firstObject) {
+                    find = YES;
+                    [jsonDic setValue:attribute forKey:@"attribute"];
+                    [jsonDic setValue:jsonData forKey:@"attributeValue"];
+                }
                 break;
             }
         }
-        
     }
-    if (jsonData.length == 0) {
-        AlertErrorText(NSLocalizedString(@"Json Data is not available in selected View.", nil), NSLocalizedString(@"Look in the superview.", nil), CurrentKeyWindow);
-        return;
+    
+    if (!find) {
+        jsonDic = [[self findJsonData:item.superItem] mutableCopy];
     }
-    [LKNavigationManager.sharedInstance showJsonEdit:jsonData];
+    return [jsonDic copy];
 }
+
 
 @end

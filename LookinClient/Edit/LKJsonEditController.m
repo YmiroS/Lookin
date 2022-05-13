@@ -8,6 +8,7 @@
 
 #import "LKJsonEditController.h"
 #import <JavaScriptCore/JavaScriptCore.h>
+#import "NSDictionary+Addition.h"
 @interface LKJsonEditController ()
 
 @property (copy) NSString *htmlString;
@@ -63,12 +64,14 @@
     
 }
 
--(void) saveString {
+-(void) saveStringwithBlock:(void (^)(NSString* saveJson))nextBlock {
     [_webView evaluateJavaScript:@"saveToString()"
                completionHandler:^(id _Nullable obj, NSError * _Nullable error) {
         //获取修改后的数据并保存,用于数据回传并刷新
         NSString *saveString = (NSString*)obj;
-        
+        NSDictionary* dic = [NSDictionary dictionaryWithJsonString: saveString];
+        NSString *str = [dic jsonString];
+        nextBlock(str);
     }];
 }
 

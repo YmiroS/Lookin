@@ -42,6 +42,6 @@
 
 #import "ShortCocoa+LookinClient.h"
 #import "LookinMsgAttribute.h"
-
+#import <Foundation/Foundation.h>
 
 #endif /* PrefixHeader_pch */

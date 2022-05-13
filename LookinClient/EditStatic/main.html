@@ -60,7 +60,7 @@
             require(['vs/editor/editor.main'], function() {
                 editor = monaco.editor.create(document.getElementById('container'), {
                     minimap: {
-                        enabled: false,
+                        enabled: true,
                     },
                     value: jsonString,
                     language: 'json',

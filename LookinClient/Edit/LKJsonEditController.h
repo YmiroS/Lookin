@@ -16,4 +16,5 @@
 
 @property (strong) LKJsonEditWebView *webView;
 - (void)loadJsonEditor;
+-(void) saveStringwithBlock:(void (^)(NSString* saveJson))nextBlock;
 @end

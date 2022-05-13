@@ -102,6 +102,54 @@
         self.isSyncing = NO;
     }];
 }
+- (void)updatePeartialRefreshWithItem:(LookinDisplayItem *) item {
+    LKInspectableApp *app = [LKAppsManager sharedInstance].inspectingApp;
+    if (!app || !self.dataSource.flatItems.count) {
+        return;
+    }
+    
+    self.isSyncing = YES;
+    
+    [self.updateAll_ProgressSignal sendNext:[RACTuple tupleWithObjects:@0, @0, nil]];
+    
+    NSArray<LookinStaticAsyncUpdateTask *> *tasks = [self _makeScreenshotsAndAttrGroupsTasksWtihRootItem:item];
+    NSArray<LookinStaticAsyncUpdateTasksPackage *> *packages = [self _makePackagesFromTasks:tasks];
+    
+    NSUInteger totalTasksCount = tasks.count;
+    __block NSUInteger receivedTasksCount = 0;
+    @weakify(self);
+    [[app fetchHierarchyDetailWithTaskPackages:packages] subscribeNext:^(NSArray<LookinDisplayItemDetail *> *details) {
+        @strongify(self);
+        [details enumerateObjectsUsingBlock:^(LookinDisplayItemDetail * _Nonnull detail, NSUInteger idx, BOOL * _Nonnull stop) {
+            [[LKStaticHierarchyDataSource sharedInstance] modifyWithDisplayItemDetail:detail];
+        }];
+        receivedTasksCount += details.count;
+        [self.updateAll_ProgressSignal sendNext:[RACTuple tupleWithObjects:@(receivedTasksCount), @(totalTasksCount), nil]];
+        
+    } error:^(NSError * _Nullable error) {
+        @strongify(self);
+        if (error.code == LookinErrCode_PingFailForTimeout) {
+            error = LookinErrorMake(NSLocalizedString(@"Failed to sync screenshots due to the request timeout.", nil), LookinErrorText_Timeout);
+        } else if (error.code == LookinErrCode_Timeout) {
+            NSString *msgTitle = [NSString stringWithFormat:NSLocalizedString(@"Failed to sync remaining %@ screenshots due to the request timeout.", nil), @(totalTasksCount - receivedTasksCount)];
+            NSString *msgDetail = NSLocalizedString(@"Perhaps your iOS app is paused with breakpoint in Xcode, blocked by other tasks in main thread, or moved to background state.\nToo large screenshots may also lead to this error.", nil);
+            error = LookinErrorMake(msgTitle, msgDetail);
+        }
+        [self.updateAll_CompletionSignal sendNext:nil];
+        [[RACScheduler mainThreadScheduler] afterDelay:1 schedule:^{
+            // 此时可能 StaticViewController 还没来得及被初始化导致错误 tips 显示不出来，所以稍等一下
+            [self.updateAll_ErrorSignal sendNext:error];
+        }];
+        self.isSyncing = NO;
+    } completed:^{
+        // 注意，用户手动取消请求后，也会走到这里
+        @strongify(self);
+        [self.updateAll_CompletionSignal sendNext:nil];
+        self.isSyncing = NO;
+    }];
+}
+
+
 
 - (void)endUpdatingAll {
     [InspectingApp cancelHierarchyDetailFetching];
@@ -119,6 +167,55 @@
     }].mutableCopy;
     
     [self.dataSource.flatItems enumerateObjectsUsingBlock:^(LookinDisplayItem * _Nonnull item, NSUInteger idx, BOOL * _Nonnull stop) {
+        if (item.avoidSyncScreenshot) {
+            LookinStaticAsyncUpdateTask *task = [self _taskFromDisplayItem:item type:LookinStaticAsyncUpdateTaskTypeNoScreenshot];
+            if (![tasks containsObject:task]) {
+                [tasks addObject:task];
+            }
+            
+        } else {
+            LookinStaticAsyncUpdateTask *task = [self _taskFromDisplayItem:item type:LookinStaticAsyncUpdateTaskTypeGroupScreenshot];
+            if (![tasks containsObject:task]) {
+                [tasks addObject:task];
+            }
+            
+            if (item.isExpandable) {
+                LookinStaticAsyncUpdateTask *task2 = [self _taskFromDisplayItem:item type:LookinStaticAsyncUpdateTaskTypeSoloScreenshot];
+                if (![tasks containsObject:task2]) {
+                    [tasks addObject:task2];
+                }
+            }
+        }
+    }];
+    
+    return tasks.copy;
+}
+
+
+- (NSArray<LookinStaticAsyncUpdateTask *> *)_makeScreenshotsAndAttrGroupsTasksWtihRootItem:(LookinDisplayItem *)rootItem {
+    NSMutableArray<LookinStaticAsyncUpdateTask *> *tasks = [(NSArray<LookinDisplayItem *> *)self.dataSource.displayingFlatItems lookin_map:^id(NSUInteger idx, LookinDisplayItem *item) {
+//        if(item.displayingObject.oid == rootItem.displayingObject.oid) {
+//            needRefreshCount = item.subitems.count;
+//        }
+        if (item.avoidSyncScreenshot) {
+            return [self _taskFromDisplayItem:item type:LookinStaticAsyncUpdateTaskTypeNoScreenshot];
+        } else if (item.isExpandable && item.isExpanded) {
+            return [self _taskFromDisplayItem:item type:LookinStaticAsyncUpdateTaskTypeSoloScreenshot];
+        } else {
+            return [self _taskFromDisplayItem:item type:LookinStaticAsyncUpdateTaskTypeGroupScreenshot];
+        }
+    }].mutableCopy;
+    __block NSInteger needRefreshCount = 0;
+    __block NSInteger needRefreshIndex = 0;
+    [self.dataSource.flatItems enumerateObjectsUsingBlock:^(LookinDisplayItem * _Nonnull item, NSUInteger idx, BOOL * _Nonnull stop) {
+        if(item.displayingObject.oid == rootItem.displayingObject.oid) {
+            needRefreshCount = item.subitems.count;
+            needRefreshIndex = (NSInteger)idx;
+        }
+    }];
+    
+    NSArray<LookinDisplayItem *> *flatItem = [self.dataSource.flatItems subarrayWithRange:NSMakeRange(needRefreshIndex, needRefreshCount)];
+    [flatItem enumerateObjectsUsingBlock:^(LookinDisplayItem * _Nonnull item, NSUInteger idx, BOOL * _Nonnull stop) {
         if (item.avoidSyncScreenshot) {
             LookinStaticAsyncUpdateTask *task = [self _taskFromDisplayItem:item type:LookinStaticAsyncUpdateTaskTypeNoScreenshot];
             if (![tasks containsObject:task]) {

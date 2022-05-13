@@ -16,6 +16,8 @@
 
 /// 开始拉取
 - (void)updateAll;
+/// 根据根节点 开始拉取局部
+- (void)updatePeartialRefreshWithItem:(LookinDisplayItem *)item;
 /// 终止拉取
 - (void)endUpdatingAll;
 /// 调用 updateAll 后，该 signal 会不断发出信号。data 是 RACTuple，tuple.first 是 NSNumber，表示已经收到的数据总数，tuple.second 也是 NSNumber，表示预期会接收到的数据总数

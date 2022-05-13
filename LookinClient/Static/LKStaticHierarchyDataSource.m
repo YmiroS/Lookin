@@ -66,6 +66,29 @@
     [[LKStaticAsyncUpdateManager sharedInstance] updateAll];
 }
 
+- (void)reloadWithHierarchyInfo:(LookinHierarchyInfo *)info keepState:(BOOL)keepState AndRootItem: (LookinDisplayItem *) item {
+    [super reloadWithHierarchyInfo:info keepState:keepState];
+    
+    _appInfo = info.appInfo;
+    
+    NSAssert(info.appInfo.screenScale > 0, @"");
+    CGFloat screenScale = MAX(info.appInfo.screenScale, 1);
+
+    // SCNNode 的图片的长和宽均不能超过 16384px，这里再随手减掉 100，注意单位是 px 不是 pt
+    CGFloat maxLengthInPx = LookinNodeImageMaxLengthInPx - 100;
+    [self.flatItems enumerateObjectsUsingBlock:^(LookinDisplayItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        CGFloat widthInPx = obj.frame.size.width * screenScale;
+        CGFloat heightInPx = obj.frame.size.height * screenScale;
+        if (widthInPx > maxLengthInPx || heightInPx > maxLengthInPx) {
+            obj.avoidSyncScreenshot = YES;
+        }
+    }];
+    
+    [[LKStaticAsyncUpdateManager sharedInstance] updatePeartialRefreshWithItem:item];
+}
+
+
+
 - (void)modifyWithDisplayItemDetail:(LookinDisplayItemDetail *)detail {
     if (!detail) {
         return;
