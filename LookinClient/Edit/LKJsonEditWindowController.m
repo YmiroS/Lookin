@@ -140,6 +140,7 @@
         @weakify(self);
         [[[LKAppsManager sharedInstance].inspectingApp submitModification:modification] subscribeNext:^(LookinDisplayItemDetail *detail) {
             NSLog(@"modification - succ");
+            [self close];
             @strongify(self);
             LKInspectableApp *app = [LKAppsManager sharedInstance].inspectingApp;
             [[app fetchHierarchyData] subscribeNext:^(LookinHierarchyInfo *info) {
