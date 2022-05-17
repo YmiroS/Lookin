@@ -406,6 +406,9 @@ static CGFloat const kRowHeight = 28;
 
 -(NSDictionary *)findJsonData: (LookinDisplayItem *)item {
     NSArray<LookinAttributesGroup *> *group = item.attributesGroupList;
+    if (!group) {
+        return nil;
+    }
     NSMutableString * jsonData = [NSMutableString stringWithString:@""];
     NSMutableDictionary * jsonDic = [NSMutableDictionary new];
     BOOL find = NO;
