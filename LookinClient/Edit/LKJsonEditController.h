@@ -12,8 +12,8 @@
 #import "LKJsonEditWebView.h"
 
 
-@interface LKJsonEditController : LKBaseViewController<WKNavigationDelegate, WKUIDelegate>
-
+@interface LKJsonEditController : LKBaseViewController<WKNavigationDelegate, WKUIDelegate, WKScriptMessageHandler>
+@property (copy) NSString *jsonString;
 @property (strong) LKJsonEditWebView *webView;
 - (void)loadJsonEditor;
 -(void) saveStringwithBlock:(void (^)(NSString* saveJson))nextBlock;

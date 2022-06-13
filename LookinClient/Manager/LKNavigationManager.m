@@ -22,6 +22,7 @@
 #import "LKAboutWindowController.h"
 #import "LKJsonEditWindowController.h"
 #import "LookinAttribute.h"
+#import "NSDictionary+Addition.h"
 
 
 @interface LKNavigationManager ()
@@ -112,11 +113,71 @@
                                                          ofType:@"html"
                                                     inDirectory:@"EditStatic"];
     NSMutableString *htmlString = [NSMutableString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:nil];
-    NSString *newhtmlString = [htmlString stringByReplacingOccurrencesOfString:@"{%$#@!}" withString:jsonData];
+    
+    NSMutableDictionary *jsonDict = [[NSDictionary dictionaryWithJsonString:jsonData] mutableCopy];
+    
+    NSString *zyString = [[self dictionaryEscapeAddWithdict:jsonDict] jsonString];
+    
+    NSString *newhtmlString = [htmlString stringByReplacingOccurrencesOfString:@"{%$#@!}" withString:zyString];
     NSString* newfilePath = [[NSBundle mainBundle] pathForResource:@"index"
                                                          ofType:@"html"
                                                     inDirectory:@"EditStatic"];
     BOOL success = [newhtmlString writeToFile:newfilePath atomically:YES encoding:NSUTF8StringEncoding error:nil];
+}
+
+- (NSDictionary *) dictionaryEscapeAddWithdict: (NSMutableDictionary*) dic {
+    [dic enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
+        if ([obj isKindOfClass:[NSString class]]) {
+            dic[key] = [self stringEscapeAddWithString:(NSString*)obj];
+        } else if ([obj isKindOfClass:[NSDictionary class]]) {
+            NSMutableDictionary * tempDic = [[NSMutableDictionary alloc] initWithDictionary:obj];
+            [self dictionaryEscapeAddWithdict: tempDic];
+            dic[key] = tempDic;
+        } else if ([obj isKindOfClass:[NSArray class]]) {
+            NSMutableArray *tempArray = [NSMutableArray new];
+            for (id value in (NSArray*) obj) {
+                NSMutableDictionary * tempDic = [[NSMutableDictionary alloc] initWithDictionary:value];
+                if ([value isKindOfClass:[NSDictionary class]]) {
+                    [self dictionaryEscapeAddWithdict:tempDic];
+                    [tempArray addObject:tempDic];
+                } else if ([value isKindOfClass:[NSString class]]) {
+                    NSString *tempString = [self stringEscapeAddWithString:(NSString*)value];
+                    [tempArray addObject:tempString];
+                }
+            }
+            dic[key] = [tempArray copy];
+        }
+    }];
+    return dic;
+}
+
+- (NSString *) stringEscapeAddWithString: (NSString*)string {
+    NSString *specialString = @"\"";
+//    NSString *specialString2 = @"\\";
+    NSString *replaceText = @"\\\"";
+//    NSString *replaceText2 = @"\\\\";
+    
+    NSMutableString *zyString = [[NSMutableString alloc] initWithString: string];
+    if ([zyString localizedStandardContainsString:specialString]) { // 效果等同于[message containsString:specialString]
+        // 遍历所有字符串
+        [zyString enumerateSubstringsInRange:NSMakeRange(0, zyString.length) options:NSStringEnumerationByComposedCharacterSequences usingBlock:^(NSString * _Nullable substring, NSRange substringRange, NSRange enclosingRange, BOOL * _Nonnull stop) {
+            if ([substring isEqualToString:specialString]) {
+                // 转义特殊字符串
+                [zyString replaceOccurrencesOfString:substring withString:replaceText options:NSLiteralSearch range:enclosingRange];
+            }
+        }];
+    }
+
+//    if ([zyString localizedStandardContainsString:specialString2]) { // 效果等同于[message containsString:specialString]
+//        // 遍历所有字符串
+//        [zyString enumerateSubstringsInRange:NSMakeRange(0, zyString.length) options:NSStringEnumerationByComposedCharacterSequences usingBlock:^(NSString * _Nullable substring, NSRange substringRange, NSRange enclosingRange, BOOL * _Nonnull stop) {
+//            if ([substring isEqualToString:specialString2]) {
+//                // 转义特殊字符串
+//                [zyString replaceOccurrencesOfString:substring withString:replaceText2 options:NSLiteralSearch range:enclosingRange];
+//            }
+//        }];
+//    }
+    return zyString;
 }
 
 

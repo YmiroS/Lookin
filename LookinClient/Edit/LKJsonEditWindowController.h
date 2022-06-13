@@ -10,6 +10,7 @@
 #import "LookinAttribute.h"
 @interface LKJsonEditWindowController : LKWindowController
 ///刷新 修改需要使用的属性
+@property(copy) NSString *jsonString;
 @property(nonatomic, strong) LookinAttribute *attribute;
 //刷新数据
 -(void)refresh;

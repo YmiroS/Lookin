@@ -68,12 +68,70 @@
     [_webView evaluateJavaScript:@"saveToString()"
                completionHandler:^(id _Nullable obj, NSError * _Nullable error) {
         //获取修改后的数据并保存,用于数据回传并刷新
-        NSString *saveString = (NSString*)obj;
+        NSString *saveString = [self stringEscapeDeleteWithString:(NSString*)obj];
         NSDictionary* dic = [NSDictionary dictionaryWithJsonString: saveString];
         NSString *str = [dic jsonString];
         nextBlock(str);
     }];
 }
+
+
+//- (NSDictionary *) dictionaryEscapeAddWithdict: (NSMutableDictionary*) dic {
+//    [dic enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
+//        if ([obj isKindOfClass:[NSString class]]) {
+//            dic[key] = [self stringEscapeDeleteWithString:(NSString*)obj];
+//        } else if ([obj isKindOfClass:[NSDictionary class]]) {
+//            NSMutableDictionary * tempDic = [[NSMutableDictionary alloc] initWithDictionary:obj];
+//            [self dictionaryEscapeAddWithdict: tempDic];
+//            dic[key] = tempDic;
+//        } else if ([obj isKindOfClass:[NSArray class]]) {
+//            NSMutableArray *tempArray = [NSMutableArray new];
+//            for (id value in (NSArray*) obj) {
+//                NSMutableDictionary * tempDic = [[NSMutableDictionary alloc] initWithDictionary:value];
+//                if ([value isKindOfClass:[NSDictionary class]]) {
+//                    [self dictionaryEscapeAddWithdict:tempDic];
+//                    [tempArray addObject:tempDic];
+//                } else if ([value isKindOfClass:[NSString class]]) {
+//                    NSString *tempString = [self stringEscapeDeleteWithString:(NSString*)value];
+//                    [tempArray addObject:tempString];
+//                }
+//            }
+//            dic[key] = [tempArray copy];
+//        }
+//    }];
+//    return dic;
+//}
+
+- (NSString *) stringEscapeDeleteWithString: (NSString*)string {
+    NSString *specialString = @"\\";
+//    NSString *specialString2 = @"\\";
+    NSString *replaceText = @"";
+//    NSString *replaceText2 = @"\\\\";
+    
+    NSMutableString *zyString = [[NSMutableString alloc] initWithString: string];
+    if ([zyString localizedStandardContainsString:specialString]) { // 效果等同于[message containsString:specialString]
+        // 遍历所有字符串
+        [zyString enumerateSubstringsInRange:NSMakeRange(0, zyString.length) options:NSStringEnumerationByComposedCharacterSequences usingBlock:^(NSString * _Nullable substring, NSRange substringRange, NSRange enclosingRange, BOOL * _Nonnull stop) {
+            if ([substring isEqualToString:specialString]) {
+                // 转义特殊字符串
+                [zyString replaceOccurrencesOfString:substring withString:replaceText options:NSLiteralSearch range:enclosingRange];
+            }
+        }];
+    }
+
+//    if ([zyString localizedStandardContainsString:specialString2]) { // 效果等同于[message containsString:specialString]
+//        // 遍历所有字符串
+//        [zyString enumerateSubstringsInRange:NSMakeRange(0, zyString.length) options:NSStringEnumerationByComposedCharacterSequences usingBlock:^(NSString * _Nullable substring, NSRange substringRange, NSRange enclosingRange, BOOL * _Nonnull stop) {
+//            if ([substring isEqualToString:specialString2]) {
+//                // 转义特殊字符串
+//                [zyString replaceOccurrencesOfString:substring withString:replaceText2 options:NSLiteralSearch range:enclosingRange];
+//            }
+//        }];
+//    }
+    return zyString;
+}
+
+
 
 - (void) autoFormattor
 {

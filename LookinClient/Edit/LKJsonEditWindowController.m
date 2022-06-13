@@ -32,7 +32,6 @@
 
 
 @interface LKJsonEditWindowController ()<NSToolbarDelegate>
-@property(copy) NSString *jsonString;
 @property(nonatomic, strong) NSMutableDictionary<NSString *, NSToolbarItem *> *toolbarItemsMap;
 @end
 
