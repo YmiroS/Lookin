@@ -136,13 +136,23 @@
         } else if ([obj isKindOfClass:[NSArray class]]) {
             NSMutableArray *tempArray = [NSMutableArray new];
             for (id value in (NSArray*) obj) {
-                NSMutableDictionary * tempDic = [[NSMutableDictionary alloc] initWithDictionary:value];
                 if ([value isKindOfClass:[NSDictionary class]]) {
+                    NSMutableDictionary * tempDic = [[NSMutableDictionary alloc] initWithDictionary:value];
                     [self dictionaryEscapeAddWithdict:tempDic];
                     [tempArray addObject:tempDic];
                 } else if ([value isKindOfClass:[NSString class]]) {
                     NSString *tempString = [self stringEscapeAddWithString:(NSString*)value];
                     [tempArray addObject:tempString];
+                } else if ([value isKindOfClass:[NSArray class]]) {
+                    NSMutableArray *doubleArray = [NSMutableArray new];
+                    for (id oneObj in value) {
+                        if ([oneObj isKindOfClass:[NSDictionary class]]) {
+                            NSMutableDictionary * tempDic = [[NSMutableDictionary alloc] initWithDictionary:oneObj];
+                            [self dictionaryEscapeAddWithdict:tempDic];
+                            [doubleArray addObject:tempDic];
+                        }
+                    }
+                    [tempArray addObject:doubleArray];
                 }
             }
             dic[key] = [tempArray copy];
