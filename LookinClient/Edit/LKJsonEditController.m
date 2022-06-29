@@ -70,7 +70,13 @@
         //获取修改后的数据并保存,用于数据回传并刷新
         NSString *saveString = [self stringEscapeDeleteWithString:(NSString*)obj];
         NSDictionary* dic = [NSDictionary dictionaryWithJsonString: saveString];
-        NSString *str = [dic jsonString];
+        NSMutableString *str = [dic jsonString];
+        if (str == nil) {
+            str = [obj mutableCopy];
+            if (str == nil) {
+                AlertErrorText(NSLocalizedString(@"Json Data is error.", nil), @"", CurrentKeyWindow);
+            }
+        }
         nextBlock(str);
     }];
 }

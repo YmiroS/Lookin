@@ -147,6 +147,7 @@
 "Open Image with Preview…" = "Open Image with Preview…";
 "The feature is not available in current mode." = "The feature is not available in current mode.";
 "Json Data is not available in selected View." = "Json Data is not available in selected View.";
+"Json Data is error." = "Json Data is error.";
 "You must connect Lookin with target iOS app before using this feature." = "You must connect Lookin with target iOS app before using this feature.";
 "Look in the superview." = "Look in the superview.";
 "Operation failed. The image property value of selected UIImageView is nil." = "Operation failed. The image property value of selected UIImageView is nil.";

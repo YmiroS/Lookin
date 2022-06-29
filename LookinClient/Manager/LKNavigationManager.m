@@ -163,9 +163,9 @@
 
 - (NSString *) stringEscapeAddWithString: (NSString*)string {
     NSString *specialString = @"\"";
-//    NSString *specialString2 = @"\\";
+    NSString *specialString2 = @"\\\\";
     NSString *replaceText = @"\\\"";
-//    NSString *replaceText2 = @"\\\\";
+    NSString *replaceText2 = @"\\\\\\";
     
     NSMutableString *zyString = [[NSMutableString alloc] initWithString: string];
     if ([zyString localizedStandardContainsString:specialString]) { // 效果等同于[message containsString:specialString]
@@ -178,15 +178,10 @@
         }];
     }
 
-//    if ([zyString localizedStandardContainsString:specialString2]) { // 效果等同于[message containsString:specialString]
-//        // 遍历所有字符串
-//        [zyString enumerateSubstringsInRange:NSMakeRange(0, zyString.length) options:NSStringEnumerationByComposedCharacterSequences usingBlock:^(NSString * _Nullable substring, NSRange substringRange, NSRange enclosingRange, BOOL * _Nonnull stop) {
-//            if ([substring isEqualToString:specialString2]) {
-//                // 转义特殊字符串
-//                [zyString replaceOccurrencesOfString:substring withString:replaceText2 options:NSLiteralSearch range:enclosingRange];
-//            }
-//        }];
-//    }
+    if ([zyString localizedStandardContainsString:specialString2]) { // 效果等同于[message containsString:specialString]
+        // 遍历所有字符串
+        zyString = [[zyString stringByReplacingOccurrencesOfString:specialString2 withString:replaceText2] mutableCopy];
+    }
     return zyString;
 }
 
