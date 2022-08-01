@@ -24,3 +24,11 @@
 }
 
 @end
+
+@implementation LKDashboardAttributeGaiaXDataView
+
+- (NSArray<NSString *> *)stringListWithAttribute:(LookinAttribute *)attribute {
+    return attribute.value;
+}
+
+@end

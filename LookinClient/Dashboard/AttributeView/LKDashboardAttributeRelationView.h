@@ -15,3 +15,7 @@
 @interface LKDashboardAttributeJsonDataView : LKDashboardAttributeStringArrayView
 
 @end
+
+@interface LKDashboardAttributeGaiaXDataView : LKDashboardAttributeStringArrayView
+
+@end

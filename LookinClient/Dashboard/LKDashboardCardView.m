@@ -276,6 +276,7 @@
                  LookinAttrGroup_Class: NSImageMake(@"dashboard_class"),
                  LookinAttrGroup_Relation: NSImageMake(@"dashboard_relation"),
                  LookinAttrGroup_Json: NSImageMake(@"dashboard_relation"),
+                 LookinAttrGroup_GaiaX:NSImageMake(@"dashboard_layer"),
                  LookinAttrGroup_Layout: NSImageMake(@"dashboard_layout"),
                  LookinAttrGroup_AutoLayout: NSImageMake(@"dashboard_autolayout"),
                  LookinAttrGroup_ViewLayer: NSImageMake(@"dashboard_layer"),

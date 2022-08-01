@@ -19,6 +19,7 @@ log/*
 *.perspectivev3
 *.pbxuser
 *.xcworkspace
+*.xcworkspace/xcuserdata
 *.framework/
 xcuserdata
 

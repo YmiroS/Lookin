@@ -28,6 +28,8 @@
 
 - (void)showJsonEdit: (NSString *)jsonString AndAttribute:(LookinAttribute *)attribute;
 
+- (void)showGaiaXEdit: (NSString *)jsonString AndAttribute:(LookinAttribute *)attribute;
+
 - (BOOL)showReaderWithFilePath:(NSString *)filePath error:(NSError **)error;
 - (void)showReaderWithHierarchyFile:(LookinHierarchyFile *)file title:(NSString *)title;
 

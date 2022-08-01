@@ -11,6 +11,8 @@
 @interface LKJsonEditWindowController : LKWindowController
 ///刷新 修改需要使用的属性
 @property(copy) NSString *jsonString;
+@property(nonatomic, copy) NSString *title;
+@property(assign) BOOL isGaiaX;
 @property(nonatomic, strong) LookinAttribute *attribute;
 //刷新数据
 -(void)refresh;

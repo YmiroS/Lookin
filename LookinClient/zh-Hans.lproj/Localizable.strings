@@ -147,12 +147,14 @@
 "Open Image with Preview…" = "使用“预览”打开该图片…";
 "The feature is not available in current mode." = "无法在当前模式下使用该功能";
 "Json Data is not available in selected View." = "无法在该视图中找到Json数据";
+"GaiaX Data is not available in selected View." = "无法在该视图中找到GaiaX模板数据";
 "Json Data is error." = "json 数据错误";
 "Look in the superview." = "请向父视图查找";
 "You must connect Lookin with target iOS app before using this feature." = "必须和当前查看的 iOS app 实时连接上才可使用该功能";
 "Operation failed. The image property value of selected UIImageView is nil." = "操作失败，当前 UIImageView 的 image 属性似乎为 nil";
 "Export screenshot…" = "导出图像…";
 "Json Data" = "Json数据";
+"GaiaXTemplete Data" = "GaiaX 模板信息";
 "Inherits from" = "继承自";
 "No Filter Results" = "无搜索结果";
 "CancelSearch" = "取 消";

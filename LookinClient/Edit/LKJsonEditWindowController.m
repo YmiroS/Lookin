@@ -33,6 +33,7 @@
 
 @interface LKJsonEditWindowController ()<NSToolbarDelegate>
 @property(nonatomic, strong) NSMutableDictionary<NSString *, NSToolbarItem *> *toolbarItemsMap;
+@property(nonatomic, strong) LKWindow *window;
 @end
 
 @implementation LKJsonEditWindowController
@@ -44,23 +45,22 @@
     window.tabbingMode = NSWindowTabbingModeDisallowed;
     window.minSize = NSMakeSize(1120, 800);
     [window center];
+    self.window = window;
     [window setFrameUsingName:LKWindowSizeName_Json];
-    
     if (self = [self initWithWindow:window]) {
         LKJsonEditController *vc = [LKJsonEditController new];
         window.contentView = vc.view;
         self.contentViewController = vc;
-        
-        NSToolbar *toolbar = [[NSToolbar alloc] init];
-        toolbar.displayMode = NSToolbarDisplayModeIconAndLabel;
-        toolbar.sizeMode = NSToolbarSizeModeRegular;
-        toolbar.delegate = self;
-        window.toolbar = toolbar;
-
     }
     return self;
 }
 -(void)refresh {
+    self.window.title = self.title;
+    NSToolbar *toolbar = [[NSToolbar alloc] init];
+    toolbar.displayMode = NSToolbarDisplayModeIconAndLabel;
+    toolbar.sizeMode = NSToolbarSizeModeRegular;
+    toolbar.delegate = self;
+    self.window.toolbar = toolbar;
     LKJsonEditController *vc = self.contentViewController;
     [vc loadJsonEditor];
 }
@@ -71,7 +71,11 @@
 }
 
 - (NSArray<NSToolbarItemIdentifier> *)toolbarDefaultItemIdentifiers:(NSToolbar *)toolbar {
-    return @[LKToolBarIdentifier_JsonDataSave];
+    if (self.isGaiaX) {
+        return @[];
+    } else {
+        return @[LKToolBarIdentifier_JsonDataSave];
+    }
 }
 
 - (nullable NSToolbarItem *)toolbar:(NSToolbar *)toolbar itemForItemIdentifier:(NSToolbarItemIdentifier)itemIdentifier willBeInsertedIntoToolbar:(BOOL)flag {

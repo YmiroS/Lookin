@@ -100,12 +100,29 @@
     if (!self.jsonEditWindowController) {
         _jsonEditWindowController = [LKJsonEditWindowController new];
         self.jsonEditWindowController.window.delegate = self;
-    } else {
-        [self.jsonEditWindowController refresh];
     }
+    self.jsonEditWindowController.isGaiaX = NO;
+    self.jsonEditWindowController.title = @"json 数据";
+    [self.jsonEditWindowController refresh];
     self.jsonEditWindowController.attribute = attribute;
     [self.jsonEditWindowController showWindow:self];
 }
+
+- (void)showGaiaXEdit: (NSString *)jsonString AndAttribute:(LookinAttribute *)attribute {
+    [self replaceGaiaXData:jsonString];
+    if (!self.jsonEditWindowController) {
+        _jsonEditWindowController = [LKJsonEditWindowController new];
+        self.jsonEditWindowController.window.delegate = self;
+        self.jsonEditWindowController.isGaiaX = YES;
+        self.jsonEditWindowController.title = @"GaiaX 模板信息";
+    }
+    self.jsonEditWindowController.isGaiaX = YES;
+    self.jsonEditWindowController.title = @"GaiaX 模板信息";
+    [self.jsonEditWindowController refresh];
+    self.jsonEditWindowController.attribute = attribute;
+    [self.jsonEditWindowController showWindow:self];
+}
+
 
 
 -(void) replaceJsonData:(NSString *) jsonData {
@@ -124,6 +141,21 @@
                                                     inDirectory:@"EditStatic"];
     BOOL success = [newhtmlString writeToFile:newfilePath atomically:YES encoding:NSUTF8StringEncoding error:nil];
 }
+
+-(void) replaceGaiaXData:(NSString *) jsonData {
+    NSString* filePath = [[NSBundle mainBundle] pathForResource:@"main"
+                                                         ofType:@"html"
+                                                    inDirectory:@"EditStatic"];
+    NSMutableString *htmlString = [NSMutableString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:nil];
+    NSString *zyString = [self stringGaiaXEscapeAddWithString:jsonData];
+    NSString *newhtmlString = [htmlString stringByReplacingOccurrencesOfString:@"{%$#@!}" withString:zyString];
+    NSString* newfilePath = [[NSBundle mainBundle] pathForResource:@"index"
+                                                         ofType:@"html"
+                                                    inDirectory:@"EditStatic"];
+    BOOL success = [newhtmlString writeToFile:newfilePath atomically:YES encoding:NSUTF8StringEncoding error:nil];
+}
+
+
 
 - (NSDictionary *) dictionaryEscapeAddWithdict: (NSMutableDictionary*) dic {
     [dic enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
@@ -181,6 +213,23 @@
     if ([zyString localizedStandardContainsString:specialString2]) { // 效果等同于[message containsString:specialString]
         // 遍历所有字符串
         zyString = [[zyString stringByReplacingOccurrencesOfString:specialString2 withString:replaceText2] mutableCopy];
+    }
+    return zyString;
+}
+
+- (NSString *) stringGaiaXEscapeAddWithString: (NSString*)string {
+    NSString *specialString = @"'";
+    NSString *replaceText = @"\"";
+    
+    NSMutableString *zyString = [[NSMutableString alloc] initWithString: string];
+    if ([zyString localizedStandardContainsString:specialString]) { // 效果等同于[message containsString:specialString]
+        // 遍历所有字符串
+        [zyString enumerateSubstringsInRange:NSMakeRange(0, zyString.length) options:NSStringEnumerationByComposedCharacterSequences usingBlock:^(NSString * _Nullable substring, NSRange substringRange, NSRange enclosingRange, BOOL * _Nonnull stop) {
+            if ([substring isEqualToString:specialString]) {
+                // 转义特殊字符串
+                [zyString replaceOccurrencesOfString:substring withString:replaceText options:NSLiteralSearch range:enclosingRange];
+            }
+        }];
     }
     return zyString;
 }

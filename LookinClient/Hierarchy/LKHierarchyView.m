@@ -294,6 +294,15 @@ static CGFloat const kRowHeight = 28;
         item;
     })];
     
+    [menu addItem:({
+        NSMenuItem *item = [NSMenuItem new];
+        item.target = self;
+        item.action = @selector(_showJsonData:);
+        item.title = NSLocalizedString(@"Json Data", nil);
+        item;
+    })];
+    
+    
     // 复制文字
     NSMutableArray<NSString *> *stringsToCopy = [NSMutableArray array];
     

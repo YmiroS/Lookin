@@ -153,6 +153,7 @@
 "Operation failed. The image property value of selected UIImageView is nil." = "Operation failed. The image property value of selected UIImageView is nil.";
 "Export screenshot…" = "Export screenshot…";
 "Json Data" = "Json Data";
+"GaiaXTemplete Data" = "GaiaXTemplete Data";
 "Inherits from" = "Inherits from";
 "No Filter Results" = "No Filter Results";
 "CancelSearch" = "Cancel";
