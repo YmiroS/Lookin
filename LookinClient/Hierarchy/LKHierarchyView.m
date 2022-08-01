@@ -295,12 +295,14 @@ static CGFloat const kRowHeight = 28;
     })];
     
     [menu addItem:({
-        NSMenuItem *item = [NSMenuItem new];
-        item.target = self;
-        item.action = @selector(_showJsonData:);
-        item.title = NSLocalizedString(@"Json Data", nil);
-        item;
-    })];
+           NSMenuItem *item = [NSMenuItem new];
+           item.enabled = YES;
+           item.target = self;
+           item.action = @selector(_GaiaXInfoData:);
+           item.title = NSLocalizedString(@"GaiaXTemplete Data", nil);
+           item;
+       })];
+       
     
     
     // 复制文字
@@ -394,6 +396,58 @@ static CGFloat const kRowHeight = 28;
     LKHierarchyRowView *view = [menuItem.menu lookin_getBindObjectForKey:kMenuBindKey_RowView];
     [LKExportManager exportScreenshotWithDisplayItem:view.displayItem];
 }
+
+- (void)_GaiaXInfoData:(NSMenuItem *)menuItem {
+    LKHierarchyRowView *view = [menuItem.menu lookin_getBindObjectForKey:kMenuBindKey_RowView];
+
+    if (![LKAppsManager sharedInstance].inspectingApp) {
+        AlertError(LookinErr_NoConnect, CurrentKeyWindow);
+        return;
+    }
+    LookinDisplayItem *item = view.displayItem;
+    NSDictionary *jsonDic = [self findJGaiaXInfo:item];
+    NSString *jsonData = [jsonDic valueForKey:@"attributeValue"];
+    LookinAttribute *attribute = [jsonDic valueForKey:@"attribute"];
+    if (jsonData.length == 0) {
+        AlertErrorText(NSLocalizedString(@"GaiaX Data is not available in selected View.", nil), NSLocalizedString(@"Look in the superview.", nil), CurrentKeyWindow);
+        return;
+    }
+    [[LKNavigationManager sharedInstance] showGaiaXEdit:jsonData AndAttribute:attribute];
+}
+
+ 
+-(NSDictionary *)findJGaiaXInfo: (LookinDisplayItem *)item {
+    if (item == nil) {
+        return nil;
+    }
+    NSArray<LookinAttributesGroup *> *group = item.attributesGroupList;
+    NSMutableString * jsonData = [NSMutableString stringWithString:@""];
+    NSMutableDictionary * jsonDic = [NSMutableDictionary new];
+    BOOL find = NO;
+    for (LookinAttributesGroup *item in group) {
+        if ([item.identifier isEqualToString:LookinAttrGroup_GaiaX]) {
+            LookinAttributesSection *section = item.attrSections.firstObject;
+            LookinAttribute *attribute = section.attributes.firstObject;
+            if (attribute != nil) {
+                NSArray<NSString*> *stringArray = (NSArray<NSString*> *)attribute.value;
+                jsonData = [stringArray.firstObject mutableCopy];
+                if (stringArray.firstObject) {
+                    find = YES;
+                    [jsonDic setValue:attribute forKey:@"attribute"];
+                    [jsonDic setValue:jsonData forKey:@"attributeValue"];
+                }
+                break;
+            }
+        }
+    }
+    
+    if (!find) {
+        jsonDic = [[self findJGaiaXInfo:item.superItem] mutableCopy];
+    }
+    return [jsonDic copy];
+}
+
+
 
 - (void)_showJsonData:(NSMenuItem *)menuItem {
     LKHierarchyRowView *view = [menuItem.menu lookin_getBindObjectForKey:kMenuBindKey_RowView];
