@@ -26,6 +26,10 @@
                             <menuItem isSeparatorItem="YES" id="aUj-9Z-htq"/>
                             <menuItem title="Preferences…" tag="12" keyEquivalent="," id="XNQ-bk-Zmh"/>
                             <menuItem isSeparatorItem="YES" id="uqd-Ho-Wgq"/>
+                            <menuItem title="Check for Updates…" tag="13" id="6je-u8-N3K">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="fdH-nj-Wf7"/>
                             <menuItem title="Hide Lookin" keyEquivalent="h" id="dfQ-f5-8Pi">
                                 <connections>
                                     <action selector="hide:" target="-1" id="Ejf-K9-BJ9"/>
