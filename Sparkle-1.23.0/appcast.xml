@@ -6,7 +6,7 @@
             <title>Version 2.0.3(支持OneArch2.0和GaiaX相关功能)</title>
             <pubDate>Tue, 02 Augst 2022 14:53:11 +0000</pubDate>
             <!-- Sparkle 1.21+ uses sparkle::edSignature="ed25519" instead of sparkle::dsaSignature="deprecated DSA" -->
-            <enclosure url="https://github.com/YmiroS/Lookin/releases/download/untagged-d0643a82ade138cb4afc/LookinforYouKu-2-0-3.zip" sparkle:version="3" sparkle:shortVersionString="2.0.3" length="6862543" type="application/octet-stream" sparkle:edSignature="zBPX5I9N7Km7vYDx+PyybmlUSC7qEJiVwbXWpy4CQJlOjEPGd1K6rWXjOZBRMuQmqqyzcI37BDgg1nAp0eMwDg==" />
+            <enclosure url="http://lc-AF0VIcgd.cn-n1.lcfile.com/cC9F23Wcr7fnLHuMM9unpv4QFdrpy0DM/LookinforYouKu-2-0-3.zip" sparkle:version="3" sparkle:shortVersionString="2.0.3" length="6862543" type="application/octet-stream" sparkle:edSignature="zBPX5I9N7Km7vYDx+PyybmlUSC7qEJiVwbXWpy4CQJlOjEPGd1K6rWXjOZBRMuQmqqyzcI37BDgg1nAp0eMwDg==" />
             <sparkle:minimumSystemVersion>10.14</sparkle:minimumSystemVersion>
         </item>
         <item>
